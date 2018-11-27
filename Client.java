@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Client {
-	private final String serverip, password;
+	private String serverip, password;
 	private final int MAXTRY=3;
 	
 	private Maze maze;
@@ -22,14 +22,15 @@ public class Client {
 		Scanner keysc = null;
 		try {
 			keysc = new Scanner(new File("ClientSecret.config"));
+			serverip=keysc.nextLine();
+			password=keysc.nextLine();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(1);
+			System.out.println("WARNING, ClientSecret not found, using default connection configs.");
+			serverip = "localhost";
+			password = "asdf";
 		}
 		
-		serverip=keysc.nextLine();
-		password=keysc.nextLine();
+		
 		
 		int tries = 0;
 		while(true)

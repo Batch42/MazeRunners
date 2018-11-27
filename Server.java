@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Server {
-	private final String password;
+	private String password;
 	private static ArrayList<Session> players = new ArrayList<Session>();
 	private Maze maze;
 	public Server(){
 		Scanner keysc = null;
 		try {
 			keysc = new Scanner(new File("ServerSecret.config"));
+			password=keysc.nextLine();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(1);
+			System.out.println("WARNING, ServerSecret not found, using default connection configs.");
+			password = "asdf";
 		}
 		
-		password=keysc.nextLine();
+		
 		
 		maze = new Maze(25,25);
 		maze.generateMaze();
